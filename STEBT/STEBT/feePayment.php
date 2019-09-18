@@ -5,7 +5,6 @@
         <link rel ="stylesheet" type="text/css" href="css/acordionStyle.css" />
         <link rel ="stylesheet" type="text/css" href="css/formStyle.css" />
         <link rel ="stylesheet" type="text/css" href="css/NewAccordion.css" />
-        <link href="HTML/styles/style3.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
     </head>
 <body>
 <?php
@@ -22,7 +21,6 @@
         require_once("classes/LoginClass.php");
         require_once("classes/tableClass.php");
         require_once("classes/sessionVariablesClass.php");
-        require_once("includes/STEBTsmartHeader.php");
         
         //purchase item
         $feePayment = payFeesOwed($feeID);

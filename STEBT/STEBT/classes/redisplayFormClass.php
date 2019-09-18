@@ -1,41 +1,6 @@
 <?php
 //this class handles all of the form showing and "stickyness"
 
-function contactForm($subject, $message) {
-		?>
-		<form name="contactForm" id="contactForm" 
-			action="<?php $_SERVER["SCRIPT_NAME"] ?>"
-			method = "POST">
-			<br>
-			<center>
-				Subject: <input type="text" name="subject"
-				value="<?php print($subject); ?>"
-				onFocus="this.style.background = '#ffffff';" 
-				onBlur="this.style.background = '#bfbfbf';">
-				<br>
-				Message: <input type="text" name="message" 
-				value="<?php print($message); ?>"
-				onFocus="this.style.background = '#ffffff';" 
-				onBlur="this.style.background = '#bfbfbf';">
-				<br>
-				<input type="submit" name="submit" value="Submit" 
-				onClick="Login(this.form);" 
-				onMouseOver="this.style.color = '#404040';" 
-				onMouseOut="this.style.color = '#000000';" 
-				onFocus ="this.style.color = '#404040';" 
-				onBlur="this.style.color = '#000000';">
-                                
-			</center>
-		</form>
-		
-		<?php
-		}
-
-
-
-
-
-
 function changeItemFormStudent($itemName, $category, $description, $picture, 
                         $price, $service, $item ) {
 		?>

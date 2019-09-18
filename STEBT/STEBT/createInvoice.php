@@ -15,7 +15,6 @@ BROKEN PAGE, NOT IN USE
         <link rel ="stylesheet" type="text/css" href="css/acordionStyle.css" />
         <link rel ="stylesheet" type="text/css" href="css/formStyle.css" />
         <link rel ="stylesheet" type="text/css" href="css/NewAccordion.css" />
-        <link href="HTML/styles/style3.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
     </head>
 <body>
 <?php

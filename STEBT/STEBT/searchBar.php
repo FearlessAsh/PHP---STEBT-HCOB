@@ -1,6 +1,3 @@
-
-&nbsp;
-
 <form name="searchForm" id="searchForm" 
                         action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                         method = "POST">
@@ -25,7 +22,7 @@ if (isset($_POST['find'])) {
         require_once("classes/tableClass.php");
         if(isset($_POST['search'])){$search = $_POST['search'];}
         else{$search = "";}
-        $searchBar = searchBar($search, $userType, $verification);
+        $searchBar = searchBar($search, $userType);
 
         if($searchBar != ""){
         $_SESSION['itemName'] = $searchBar;

@@ -7,31 +7,8 @@
 /*********************************************************************************/
 /* Basic                                                                         */
 /*********************************************************************************/
-	input[name="buynow"]
-	{
-		background:url(../pictures/button.png) no-repeat ; 
-		width:98px ; 
-		height:32px ;
-		border:none ;
-	}
 
-	input[name="edititems"]
-	{
-		background:url(../pictures/editItems.png) no-repeat ; 
-		width:98px ; 
-		height:32px ;
-		border:none ;
-	}
-	
-		input[name="payfees"]
-	{
-		background:url(../pictures/payFees.png) no-repeat ; 
-		width:98px ; 
-		height:32px ;
-		border:none ;
-	}
-	
-		h1
+        h1
         {
                 text-align: center;
         }
@@ -54,7 +31,3 @@
 		color:#000000;
 		border-color:#212121;
 	}
-	
-	
-	
-	

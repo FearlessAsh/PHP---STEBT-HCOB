@@ -6,7 +6,7 @@
    //destroy the session
    session_destroy();
    //push the user to the main page
-   print("<script>window.location='index.php#TopItems';</script>");
+   print("<script>window.location='index.php';</script>");
    //exit this page
    exit();
 ?>

@@ -5,7 +5,6 @@
         <link rel ="stylesheet" type="text/css" href="css/NewAccordion.css" />
         <link rel ="stylesheet" type="text/css" href="css/formStyle.css" />
         <link rel ="stylesheet" type="text/css" href="css/acordionStyle.css" />
-        <link href="HTML/styles/style3.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
     </head>
 <body>
 <?php
@@ -21,7 +20,7 @@
         require_once("classes/StickyFormClass.php");
         require_once("classes/LoginClass.php");
         require_once("classes/tableClass.php");
-        require_once("includes/STEBTsmartHeader.php");
+        require_once("searchBar.php");
       
         
 
@@ -30,7 +29,7 @@
             
             
             //print a computers category
-            $printComputers = printCategory("Computers", $userType, $verification);
+            $printComputers = printCategory("Computers", $userType);
             if($printComputers != ""){
                 if($_SESSION['userName'] !== ""){
                 $_SESSION['itemName'] = $printComputers;
@@ -39,7 +38,7 @@
                 
                 
             //print a Clothing category
-            $printClothing = printCategory("Clothing", $userType, $verification);
+            $printClothing = printCategory("Clothing", $userType);
              if($printClothing != ""){
                  if($_SESSION['userName'] !== ""){
                 $_SESSION['itemName'] = $printClothing;
@@ -47,25 +46,25 @@
                else{"<script>window.location='loginForm.php';</script>"; }}
                
             //print a Electronics category
-            $printElectronics = printCategory("Electronics", $userType, $verification);
+            $printElectronics = printCategory("Electronics", $userType);
              if($printElectronics != ""){
                 $_SESSION['itemName'] = $printElectronics;
                 print("<script>window.location='itemSale.php';</script>");}
                 
             //print a Books category
-            $printBooks = printCategory("Books", $userType, $verification);
+            $printBooks = printCategory("Books", $userType);
              if($printBooks != ""){
                 $_SESSION['itemName'] = $printBooks;
                 print("<script>window.location='itemSale.php';</script>");}
                 
             //print a Home Decor category
-            $printHomeDecor = printCategory("Home Decor", $userType, $verification);
+            $printHomeDecor = printCategory("Home Decor", $userType);
              if($printHomeDecor != ""){
                 $_SESSION['itemName'] = $printHomeDecor;
                print("<script>window.location='itemSale.php';</script>");}
                
             //print a Miscellaneous category
-            $printMiscellaneous = printCategory("Miscellaneous", $userType, $verification);
+            $printMiscellaneous = printCategory("Miscellaneous", $userType);
              if($printMiscellaneous != ""){
                 $_SESSION['itemName'] = $printMiscellaneous;
                 print("<script>window.location='itemSale.php';</script>");}

@@ -5,7 +5,6 @@
         <link rel ="stylesheet" type="text/css" href="css/acordionStyle.css" />
         <link rel ="stylesheet" type="text/css" href="css/formStyle.css" />
         <link rel ="stylesheet" type="text/css" href="css/NewAccordion.css" />
-        <link href="HTML/styles/style3.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
     </head>
 <body>
 <?php
@@ -23,10 +22,9 @@
         require_once("classes/LoginClass.php");
         require_once("classes/tableClass.php");
         require_once("classes/sessionVariablesClass.php");
-        require_once("includes/STEBTsmartHeader.php");
         
         //purchase item
-        $itemSale = buyNow($itemName, $userType, $verification);
+        $itemSale = buyNow($itemName, $userType);
         if (isset($_POST['submit'])) {
             
             
@@ -34,7 +32,7 @@
             $createInvoice = queryItem($itemName, $userName, $userType);
             $_SESSION['statusMessage'] = $createInvoice;
             
-            if($userType == "S" AND $verification == 'V'){
+            if($userType == "S"){
                 $fee = $itemSale * 0.20; 
                 //print("ItemFee: " . $fee);
                 //$fee .= ".00";

@@ -10,15 +10,13 @@
         else {print("<p>There was a problem reaching your first name</p><br><script>window.location='logOut.php';</script>");}
          if (isset($_SESSION['lastName'])) { $lastName = $_SESSION['lastName'];}
         else {print("<p>There was a problem reaching your last name</p><br><script>window.location='logOut.php';</script>");}
-        if (isset($_SESSION['status'])) { $verification = $_SESSION['status'];}
-        else {$verification = 'N'; $_SESSION['status'] = "";}
          if (isset($_SESSION['itemName'])) { $itemName = $_SESSION['itemName'];}
         else {$_SESSION['itemName'] = ""; }
         if (isset($_SESSION['feeID'])) { $feeID = $_SESSION['feeID'];}
         else {$_SESSION['feeID'] = ""; }
         
         //print your variables so we know what we're working with
-        //print("<h1>"."Hello " . $firstName . " ". $lastName . "<br>" . "</h1>");
+        print("<h1>"."Hello " . $firstName . " ". $lastName . "<br>" . "</h1>");
         //print("<h2>" . $itemName . "</h2>");
 ?>
 

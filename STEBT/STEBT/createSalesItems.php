@@ -1,11 +1,10 @@
-<?php  session_start(); $UserTypeSession = $_SESSION['userType']; $verification = $_SESSION['status']; ?>
+<?php  session_start(); $UserTypeSession = $_SESSION['userType'];?>
 <html>
 	<head>
 		<title>Create an Item or Service</title>
 		<script language="JavaScript" type="text/JavaScript" src="login.js"></script>
 		<link rel ="stylesheet" type="text/css" href="css/formStyle.css" />
                 <link rel ="stylesheet" type="text/css" href="css/NewAccordion.css" />
-                <link href="HTML/styles/style3.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 	</head>
 	<body>
 	<?php
@@ -14,7 +13,6 @@
 		require_once("classes/StickyFormClass.php");
 		require_once("classes/LoginClass.php");
                 require_once("classes/redisplayFormClass.php");
-                require_once("includes/STEBTsmartHeader.php");
                 
 		
 		//if the user hit the submit button
@@ -31,7 +29,8 @@
 		$picture = validatePicture($_POST['picture']);
 		$price = validatePrice($_POST['price'], "Price", 8);
                 
-                if($UserTypeSession == "S" AND $verification == 'V') {
+                
+                if($UserTypeSession == "S") {
                 //the number 10 is just a placeholder
                 @$itemStatus = validateInput($_POST['itemStatus'], "Item Status", 10);
                 } else {$itemStatus = 'Item';}
@@ -50,7 +49,7 @@
                             //print an error message and redisplay the form
 				print("<p>Please re-enter the information below.</p><br>");
                                 
-                                if ($UserTypeSession == "S" AND $verification == 'V'){
+                                if ($UserTypeSession == "S"){
                                         $studentCreate = createItemFormStudent($itemName, $category, $description, $picture, $price, $service, $item );
                                 } else {
                                         $create = createItemForm($itemName, $category, $description, $picture, $price, $service, $item ); }
@@ -80,7 +79,7 @@
                 $service = "unchecked";
                 $status = "";
 		//display the form for the first time
-                            if ($UserTypeSession == "S" AND $verification == 'V'){
+                            if ($UserTypeSession == "S"){
                                 $studentCreate = createItemFormStudent($itemName, $category, $description, $picture, $price, $service, $item );
                             } else {
                                 $create = createItemForm($itemName, $category, $description, $picture, $price, $service, $item ); }

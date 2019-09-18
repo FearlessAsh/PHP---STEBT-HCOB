@@ -29,21 +29,21 @@
  *      end the section for the accordion style, then end the function
  *      (unless there was a database error, in which case print an error message)
  */
-function printCategory($category, $userType, $verification) {
+function printCategory($category, $userType) {
     $itemPage = "";
 	$db_connection = Connect();
-        if($userType == 'S' AND $verification == 'V'){$SQL = "SELECT ItemID, ItemName, Category, ItemType, Description, Picture, Price FROM SalesItems WHERE Category = '$category' AND SaleStatus = 'N'";}
-        else{$SQL = "SELECT ItemID, ItemName, Category, Description, Picture, Price FROM SalesItems WHERE Category = '$category' AND ItemType = 'I' AND SaleStatus = 'N'";}
+        if($userType == 'S'){$SQL = "SELECT ItemID, ItemName, Category, ItemType, Description, Picture, Price FROM SalesItems WHERE Category = '$category' AND SaleStatus = 'N'";}
+        if($userType == 'N'){$SQL = "SELECT ItemID, ItemName, Category, Description, Picture, Price FROM SalesItems WHERE Category = '$category' AND ItemType = 'I' AND SaleStatus = 'N'";}
         $itemRetrieval = sqlsrv_Query($db_connection, $SQL);
         $testRetrieval = sqlsrv_Query($db_connection, $SQL);
        if($itemRetrieval !== FALSE) { 
     print("<section id='$category'><h2><a href='#$category'>$category</a></h2>");
     if(($test = sqlsrv_fetch_array($testRetrieval, SQLSRV_FETCH_ASSOC)) != 0) {
         print("<table id=hor-minimalist-b>");  
-        if($userType == 'S' AND $verification == 'V') {
-            print("<tr><th>Name</th><th>Description</th><th>Item Type</th><th>Picture</th><th>Price</th><th>Buy Now</th></tr>");
+        if($userType == 'S') {
+            print("<tr><th>Name</th><th>Description</th><th>Item Type</th><th>Picture</th><th>Price</th><th>More Info</th></tr>");
             while (($Row = sqlsrv_fetch_array($itemRetrieval, SQLSRV_FETCH_ASSOC))) {
-                    if($Row['ItemType'] == "S" ){$itemType = "Service";} else {$itemType = "Item";}
+                    if($Row['ItemType'] == "S"){$itemType = "Service";} else {$itemType = "Item";}
                     $picture = $Row['Picture']; $itemName = $Row['ItemID'];
                     print( "<tr><td>{$Row['ItemName']}</td>");
                     print("<td>{$Row['Description']}</td>");
@@ -55,20 +55,24 @@ function printCategory($category, $userType, $verification) {
                     <form name="<?php $itemName ?>" id="<?php $itemName ?>" 
                           action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                           method = "POST">
-                        <input type="submit" name="buynow" 
+                        <input type="submit" name="submit" 
                         value='<?php print($itemName); ?>'
-						>
+                        onClick="Login(this.form);" 
+                        onMouseOver="this.style.color = '#404040';" 
+                        onMouseOut="this.style.color = '#000000';" 
+                        onFocus ="this.style.color = '#404040';" 
+                        onBlur="this.style.color = '#000000';">
                     </form>
                                    </td>
                     <?php
-                      if (isset($_POST['buynow'])) {
-                         $itemPage = $_POST['buynow'];
+                      if (isset($_POST['submit'])) {
+                         $itemPage = $_POST['submit'];
                     }                 
                     print("</tr>");
                     
                 } print("</table>");  
         }else{
-            print("<tr><th>Name</th><th>Description</th><th>Picture</th><th>Price</th><th>Buy Now</th></tr>");
+            print("<tr><th>Name</th><th>Description</th><th>Picture</th><th>Price</th><th>More Info</th></tr>");
                 while (($Row = sqlsrv_fetch_array($itemRetrieval, SQLSRV_FETCH_ASSOC))) {
                         $picture = $Row['Picture']; $itemName = $Row['ItemID'];
                         print( "<tr><td>{$Row['ItemName']}</td>");
@@ -80,13 +84,18 @@ function printCategory($category, $userType, $verification) {
                     <form name="<?php $itemName ?>" id="<?php $itemName ?>" 
                           action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                           method = "POST">
-                        <input type="submit" name="buynow" 
-                        value='<?php print($itemName); ?>'>
+                        <input type="submit" name="submit" 
+                        value='<?php print($itemName); ?>'
+                        onClick="Login(this.form);" 
+                        onMouseOver="this.style.color = '#404040';" 
+                        onMouseOut="this.style.color = '#000000';" 
+                        onFocus ="this.style.color = '#404040';" 
+                        onBlur="this.style.color = '#000000';">
                     </form>
                                    </td>
                     <?php
-                      if (isset($_POST['buynow'])) {
-                         $itemPage = $_POST['buynow'];
+                      if (isset($_POST['submit'])) {
+                         $itemPage = $_POST['submit'];
                     }                 
                     print("</tr>");
                     
@@ -122,11 +131,11 @@ function itemPage($tableRow){
         return($return);}
 }
 
-function searchBar($data, $userType, $verification){
+function searchBar($data, $userType){
     $itemPage = "";
     $db_connection = Connect();
-        if($userType == 'S' AND $verification == 'V'){$SQL = "SELECT ItemID, ItemName, Category, ItemType, Description, ListDate, Picture, Price FROM SalesItems WHERE ItemName LIKE '%$data%' AND SaleStatus = 'N' ";}
-        else{$SQL = "SELECT ItemID, ItemName, Category, Description, ListDate, Picture, Price FROM SalesItems WHERE ItemName LIKE '%$data%' AND ItemType = 'I' AND SaleStatus = 'N' ";}
+        if($userType == 'S'){$SQL = "SELECT ItemID, ItemName, Category, ItemType, Description, ListDate, Picture, Price FROM SalesItems WHERE ItemName LIKE '%$data%' AND SaleStatus = 'N' ";}
+        if($userType == 'N'){$SQL = "SELECT ItemID, ItemName, Category, Description, ListDate, Picture, Price FROM SalesItems WHERE ItemName LIKE '%$data%' AND ItemType = 'I' AND SaleStatus = 'N' ";}
         $itemRetrieval = sqlsrv_Query($db_connection, $SQL);
         $testRetrieval = sqlsrv_Query($db_connection, $SQL);
        if($itemRetrieval !== FALSE) {
@@ -134,7 +143,7 @@ function searchBar($data, $userType, $verification){
     print("<section id='Results'><h2><a href='#Results'>Results</a></h2>");
     if(($test = sqlsrv_fetch_array($testRetrieval, SQLSRV_FETCH_ASSOC)) != 0) {
         print("<table id=hor-minimalist-b>");  
-        if($userType == 'S' AND $verification == 'V') {
+        if($userType == 'S') {
             print("<tr><th>Name</th><th>Description</th><th>Item Type</th><th>Picture</th><th>Price</th><th>More Info</th></tr>");
             while (($Row = sqlsrv_fetch_array($itemRetrieval, SQLSRV_FETCH_ASSOC))) {
                     if($Row['ItemType'] == "S"){$itemType = "Service";} else {$itemType = "Item";}
@@ -149,13 +158,18 @@ function searchBar($data, $userType, $verification){
                     <form name="<?php $itemName ?>" id="<?php $itemName ?>" 
                           action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                           method = "POST">
-                        <input type="submit" name="buynow" 
-                        value='<?php print($itemName); ?>'>
+                        <input type="submit" name="submit" 
+                        value='<?php print($itemName); ?>'
+                        onClick="Login(this.form);" 
+                        onMouseOver="this.style.color = '#404040';" 
+                        onMouseOut="this.style.color = '#000000';" 
+                        onFocus ="this.style.color = '#404040';" 
+                        onBlur="this.style.color = '#000000';">
                     </form>
                                    </td>
                     <?php
-                      if (isset($_POST['buynow'])) {
-                         $itemPage = $_POST['buynow'];
+                      if (isset($_POST['submit'])) {
+                         $itemPage = $_POST['submit'];
                     }                 
                     print("</tr>");
                 } print("</table>");  
@@ -173,13 +187,18 @@ function searchBar($data, $userType, $verification){
                     <form name="<?php $itemName ?>" id="<?php $itemName ?>" 
                           action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                           method = "POST">
-                        <input type="submit" name="buynow" 
-                        value='<?php print($itemName); ?>'>
+                        <input type="submit" name="submit" 
+                        value='<?php print($itemName); ?>'
+                        onClick="Login(this.form);" 
+                        onMouseOver="this.style.color = '#404040';" 
+                        onMouseOut="this.style.color = '#000000';" 
+                        onFocus ="this.style.color = '#404040';" 
+                        onBlur="this.style.color = '#000000';">
                     </form>
                                    </td>
                     <?php
-                      if (isset($_POST['buynow'])) {
-                         $itemPage = $_POST['buynow'];
+                      if (isset($_POST['submit'])) {
+                         $itemPage = $_POST['submit'];
                     }                 
                     print("</tr>");
                     } print("</table>");  
@@ -189,11 +208,11 @@ function searchBar($data, $userType, $verification){
 return($itemPage);
 }
 
-function topItems($userType, $verification){
+function topItems($userType){
     $itemPage = "";
     $db_connection = Connect();
-        if($userType == 'S' AND $verification == 'V'){$SQL = "SELECT TOP 5 ItemID, ItemName, Category, ItemType, Description, ListDate, Picture, Price FROM SalesItems WHERE SaleStatus = 'N' ORDER BY ListDate ASC";}
-        else{$SQL = "SELECT TOP 5 ItemID, ItemName, Category, Description, ListDate, Picture, Price FROM SalesItems WHERE ItemType = 'I' AND SaleStatus = 'N' ORDER BY ListDate ASC";}
+        if($userType == 'S'){$SQL = "SELECT TOP 5 ItemID, ItemName, Category, ItemType, Description, ListDate, Picture, Price FROM SalesItems WHERE SaleStatus = 'N' ORDER BY ListDate ASC";}
+        if($userType == 'N'){$SQL = "SELECT TOP 5 ItemID, ItemName, Category, Description, ListDate, Picture, Price FROM SalesItems WHERE ItemType = 'I' AND SaleStatus = 'N' ORDER BY ListDate ASC";}
         $itemRetrieval = sqlsrv_Query($db_connection, $SQL);
         $testRetrieval = sqlsrv_Query($db_connection, $SQL);
        if($itemRetrieval !== FALSE) {
@@ -201,7 +220,7 @@ function topItems($userType, $verification){
     print("<section id='TopItems'><h2><a href='#TopItems'>Top Items</a></h2>");
     if(($test = sqlsrv_fetch_array($testRetrieval, SQLSRV_FETCH_ASSOC)) != 0) {
         print("<table id=hor-minimalist-b>");  
-        if($userType == 'S' AND $verification == 'V') {
+        if($userType == 'S') {
             print("<tr><th>Name</th><th>Description</th><th>Item Type</th><th>Picture</th><th>Price</th><th>Button</th></tr>");
             while (($Row = sqlsrv_fetch_array($itemRetrieval, SQLSRV_FETCH_ASSOC))) :
                     if($Row['ItemType'] == "S"){$itemType = "Service";} else {$itemType = "Item";}
@@ -216,13 +235,18 @@ function topItems($userType, $verification){
                     <form name="<?php $itemName ?>" id="<?php $itemName ?>" 
                           action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                           method = "POST">
-                        <input type="submit" name="buynow" 
-                        value='<?php print($itemName); ?>'>
+                        <input type="submit" name="submit" 
+                        value='<?php print($itemName); ?>'
+                        onClick="Login(this.form);" 
+                        onMouseOver="this.style.color = '#404040';" 
+                        onMouseOut="this.style.color = '#000000';" 
+                        onFocus ="this.style.color = '#404040';" 
+                        onBlur="this.style.color = '#000000';">
                     </form>
                                    </td>
                     <?php
-                      if (isset($_POST['buynow'])) {
-                         $itemPage = $_POST['buynow'];
+                      if (isset($_POST['submit'])) {
+                         $itemPage = $_POST['submit'];
                     }                 
                     print("</tr>");
                 endwhile; print("</table>");  
@@ -240,13 +264,18 @@ function topItems($userType, $verification){
                     <form name="<?php $itemName ?>" id="<?php $itemName ?>" 
                           action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                           method = "POST">
-                        <input type="submit" name="buynow" 
-                        value='<?php print($itemName); ?>'>
+                        <input type="submit" name="submit" 
+                        value='<?php print($itemName); ?>'
+                        onClick="Login(this.form);" 
+                        onMouseOver="this.style.color = '#404040';" 
+                        onMouseOut="this.style.color = '#000000';" 
+                        onFocus ="this.style.color = '#404040';" 
+                        onBlur="this.style.color = '#000000';">
                     </form>
                                    </td>
                     <?php
-                      if (isset($_POST['buynow'])) {
-                         $itemPage = $_POST['buynow'];
+                      if (isset($_POST['submit'])) {
+                         $itemPage = $_POST['submit'];
                     }                 
                     print("</tr>");
                     endwhile; print("</table>");  
@@ -256,11 +285,10 @@ function topItems($userType, $verification){
        return($itemPage);
 }
 
-function buyNow($itemName, $userType, $verification) {
+function buyNow($itemName, $userType) {
     $db_connection = Connect();
-    $return = "";
-    if($userType == 'S' AND $verification == 'V') {$SQL = "SELECT ItemID, ItemName, ItemType, Description, Picture, Price FROM SalesItems WHERE ItemID = '$itemName' AND SaleStatus = 'N'";}
-    else{$SQL = "SELECT ItemID, ItemName, Description, Picture, Price FROM SalesItems WHERE ItemID = '$itemName' AND SaleStatus = 'N'";}
+    if($userType == 'S') {$SQL = "SELECT ItemID, ItemName, ItemType, Description, Picture, Price FROM SalesItems WHERE ItemID = '$itemName' AND SaleStatus = 'N'";}
+    if($userType == 'N') {$SQL = "SELECT ItemID, ItemName, Description, Picture, Price FROM SalesItems WHERE ItemID = '$itemName' AND SaleStatus = 'N'";}
     $salesQuery = sqlsrv_Query($db_connection, $SQL);
     $printRow =  sqlsrv_Query($db_connection, $SQL);
     if($salesQuery !== FALSE) {
@@ -274,7 +302,7 @@ function buyNow($itemName, $userType, $verification) {
                     $picture = $Row['Picture']; $itemName = $Row['ItemID']; $return = $Row['Price'];
                     print( "<tr><td>{$Row['ItemName']}</td>");
                     print("<td>{$Row['Description']}</td>");
-                    if($userType == 'S' AND $verification == 'V') {print("<td>{$Row['ItemType']}</td>");}
+                    if($userType == 'S') {print("<td>{$Row['ItemType']}</td>");}
                     print("<td><a target='_blank' href='$picture'><img src='$picture'/></a></td>");
                     print("<td>$return</td>");
                     ?> <td><form name="buyItemForm" id="buyItemForm" 
@@ -303,7 +331,7 @@ function viewPurchasedInvoices($userName) {
     $printRow =  sqlsrv_Query($db_connection, $SQL);
     if($salesQuery !== FALSE) {
         print("<div class='accordion vertical'>");       
-        print("<section id='Invoice'><h2><a href='#Invoice'>Invoice</a></h2>");
+        print("<section id='YourInvoice'><h2><a href='#YourInvoice'>Your Invoice</a></h2>");
     if(($test = sqlsrv_fetch_array($salesQuery, SQLSRV_FETCH_ASSOC)) != 0) {
         print("<table id=hor-minimalist-b>");  
             print("<tr><th>Reciept</th><th>Item</th><th>Sales Tax</th><th>Payment Recieved</th><th>Payment Due</th></tr>");
@@ -332,7 +360,7 @@ function viewFeesOwed($userName){
     $printRow =  sqlsrv_Query($db_connection, $SQL);
     if($salesQuery !== FALSE) {
         print("<div class='accordion vertical'>");       
-        print("<section id='Fees'><h2><a href='#Fees'>Fees</a></h2>");
+        print("<section id='YourFees'><h2><a href='#YourFees'>Your Fees</a></h2>");
     if(($test = sqlsrv_fetch_array($salesQuery, SQLSRV_FETCH_ASSOC)) != 0) {
         print("<table id=hor-minimalist-b>");  
             print("<tr><th>FeeID</th><th>Billing Period</th><th>Fee Payment</th><th>Fee Owed</th><th>Pay Fee</th></tr>");
@@ -347,16 +375,21 @@ function viewFeesOwed($userName){
                     <form name="<?php $feeID ?>" id="<?php $feeID ?>" 
                           action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                           method = "POST">
-                        <input type="submit" name="payfees" 
-                        value='<?php print($feeID); ?>'>
+                        <input type="submit" name="submit" 
+                        value='<?php print($feeID); ?>'
+                        onClick="Login(this.form);" 
+                        onMouseOver="this.style.color = '#404040';" 
+                        onMouseOut="this.style.color = '#000000';" 
+                        onFocus ="this.style.color = '#404040';" 
+                        onBlur="this.style.color = '#000000';">
                     </form>
                                    </td>
                     <?php
-                      if (isset($_POST['payfees'])) {
-                         $payFee = $_POST['payfees'];
+                      if (isset($_POST['submit'])) {
+                         $payFee = $_POST['submit'];
                     }                 
                     print("</tr>");
-                    endwhile; print("</table>");  
+                    endwhile; print("</table></div>");  
     } else { print("<p>Sorry, there are no results for this category</p>");}
                     
     print("</div>");
@@ -399,18 +432,18 @@ function payFeesOwed($FeeID) {
                     }else { print("database connection ERROR");}
                     }
 
-function viewEditItems($category, $userType, $userName, $verification) {
+function viewEditItems($category, $userType, $userName) {
     $itemPage = "";
 	$db_connection = Connect();
-        if($userType == 'S' AND $verification == 'V'){$SQL = "SELECT ItemID, ItemName, Category, ItemType, Description, Picture, Price FROM SalesItems WHERE Category = '$category' AND SaleStatus = 'N' AND UserName = '$userName'";}
-        else {$SQL = "SELECT ItemID, ItemName, Category, Description, Picture, Price FROM SalesItems WHERE Category = '$category' AND ItemType = 'I' AND SaleStatus = 'N' AND UserName = '$userName'";}
+        if($userType == 'S'){$SQL = "SELECT ItemID, ItemName, Category, ItemType, Description, Picture, Price FROM SalesItems WHERE Category = '$category' AND SaleStatus = 'N' AND UserName = '$userName'";}
+        if($userType == 'N'){$SQL = "SELECT ItemID, ItemName, Category, Description, Picture, Price FROM SalesItems WHERE Category = '$category' AND ItemType = 'I' AND SaleStatus = 'N' AND UserName = '$userName'";}
         $itemRetrieval = sqlsrv_Query($db_connection, $SQL);
         $testRetrieval = sqlsrv_Query($db_connection, $SQL);
        if($itemRetrieval !== FALSE) { 
     print("<section id='$category'><h2><a href='#$category'>$category</a></h2>");
     if(($test = sqlsrv_fetch_array($testRetrieval, SQLSRV_FETCH_ASSOC)) != 0) {
         print("<table id=hor-minimalist-b>");  
-        if($userType == 'S' AND $verification == 'V') {
+        if($userType == 'S') {
             print("<tr><th>Name</th><th>Description</th><th>Item Type</th><th>Picture</th><th>Price</th><th>More Info</th></tr>");
             while (($Row = sqlsrv_fetch_array($itemRetrieval, SQLSRV_FETCH_ASSOC))) {
                     if($Row['ItemType'] == "S"){$itemType = "Service";} else {$itemType = "Item";}
@@ -425,13 +458,18 @@ function viewEditItems($category, $userType, $userName, $verification) {
                     <form name="<?php $itemName ?>" id="<?php $itemName ?>" 
                           action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                           method = "POST">
-                        <input type="submit" name="edititems" 
-                        value='<?php print($itemName); ?>'>
+                        <input type="submit" name="submit" 
+                        value='<?php print($itemName); ?>'
+                        onClick="Login(this.form);" 
+                        onMouseOver="this.style.color = '#404040';" 
+                        onMouseOut="this.style.color = '#000000';" 
+                        onFocus ="this.style.color = '#404040';" 
+                        onBlur="this.style.color = '#000000';">
                     </form>
                                    </td>
                     <?php
-                      if (isset($_POST['edititems'])) {
-                         $itemPage = $_POST['edititems'];
+                      if (isset($_POST['submit'])) {
+                         $itemPage = $_POST['submit'];
                     }                 
                     print("</tr>");
                     
@@ -449,13 +487,18 @@ function viewEditItems($category, $userType, $userName, $verification) {
                     <form name="<?php $itemName ?>" id="<?php $itemName ?>" 
                           action="<?php $_SERVER["SCRIPT_NAME"] ?>"
                           method = "POST">
-                        <input type="submit" name="edititems" 
-                        value='<?php print($itemName); ?>'>
+                        <input type="submit" name="submit" 
+                        value='<?php print($itemName); ?>'
+                        onClick="Login(this.form);" 
+                        onMouseOver="this.style.color = '#404040';" 
+                        onMouseOut="this.style.color = '#000000';" 
+                        onFocus ="this.style.color = '#404040';" 
+                        onBlur="this.style.color = '#000000';">
                     </form>
                                    </td>
                     <?php
-                      if (isset($_POST['edititems'])) {
-                         $itemPage = $_POST['edititems'];
+                      if (isset($_POST['submit'])) {
+                         $itemPage = $_POST['submit'];
                     }                 
                     print("</tr>");
                     
@@ -469,47 +512,7 @@ function viewEditItems($category, $userType, $userName, $verification) {
 
 
 
-function printServices($userType, $verification) {
-    $itemPage = "";
-	$db_connection = Connect();
-        if($userType == 'S' AND $verification == 'V'){$SQL = "SELECT ItemID, ItemName, Category, ItemType, Description, Picture, Price FROM SalesItems WHERE ItemType = 'S' AND SaleStatus = 'N'";}
-        else{$SQL = "";}
-        $itemRetrieval = sqlsrv_Query($db_connection, $SQL);
-        $testRetrieval = sqlsrv_Query($db_connection, $SQL);
-       if($itemRetrieval !== FALSE) { 
-    print("<section id='Services'><h2><a href='#Services'>All Services</a></h2>");
-    if(($test = sqlsrv_fetch_array($testRetrieval, SQLSRV_FETCH_ASSOC)) != 0) {
-        print("<table id=hor-minimalist-b>");  
-            print("<tr><th>Name</th><th>Description</th><th>Item Type</th><th>Picture</th><th>Price</th><th>More Info</th></tr>");
-            while (($Row = sqlsrv_fetch_array($itemRetrieval, SQLSRV_FETCH_ASSOC))) {
-                    if($Row['ItemType'] == "S" ){$itemType = "Service";} else {$itemType = "Item";}
-                    $picture = $Row['Picture']; $itemName = $Row['ItemID'];
-                    print( "<tr><td>{$Row['ItemName']}</td>");
-                    print("<td>{$Row['Description']}</td>");
-                    print("<td>$itemType</td>");
-                    print("<td><a target='_blank' href='$picture'><img src='$picture'/></a></td>");
-                    print("<td>{$Row['Price']}</td>");
-                    ?>
-                                    <td>
-                    <form name="<?php $itemName ?>" id="<?php $itemName ?>" 
-                          action="<?php $_SERVER["SCRIPT_NAME"] ?>"
-                          method = "POST">
-                        <input type="submit" name="buynow" 
-                        value='<?php print($itemName); ?>' >
-                    </form>
-                                   </td>
-                    <?php
-                      if (isset($_POST['buynow'])) {
-                         $itemPage = $_POST['buynow'];
-                    }                 
-                    print("</tr>");
-                    
-                } print("</table>");  
-        } else { print("<p>Sorry, there are no results for this category</p>"); $itemPage = "";}
-        print("</section>");      
-       } else { print("database connection ERROR"); }
-       return($itemPage);
-}
+
 
 
 ?>

@@ -303,12 +303,5 @@ function validatePicture($data){
     
     return($return);    
         }
-        
-        
-function contactEmail($subject, $message){
-       $email =  mail("mail@stebt.com", $subject, $message);
-       if($email == TRUE) {print("Your message email was sent.");}
-                       else{ print("Couldn't send your email");}
-}        
 
 ?>

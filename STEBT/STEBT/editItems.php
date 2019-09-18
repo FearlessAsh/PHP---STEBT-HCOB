@@ -5,7 +5,6 @@
         <link rel ="stylesheet" type="text/css" href="css/acordionStyle.css" />
         <link rel ="stylesheet" type="text/css" href="css/formStyle.css" />
         <link rel ="stylesheet" type="text/css" href="css/NewAccordion.css" />
-        <link href="HTML/styles/style3.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
     </head>
 <body>
 <?php
@@ -24,7 +23,6 @@
         require_once("classes/tableClass.php");
         require_once("classes/redisplayFormClass.php");
         require_once("classes/sessionVariablesClass.php");
-        require_once("includes/STEBTsmartHeader.php");
         
         $itemID = $itemName;
         $_SESSION['statusMessage'] = NULL;
@@ -50,7 +48,7 @@
 		$price = validatePrice($_POST['price'], "Price", 8);
                 
                 //if the user is a student, or not
-                if($userType == "S" AND $verification == 'V') {
+                if($userType == "S") {
                     //the number 10 is just a placeholder
                     @$itemStatus = validateInput($_POST['itemStatus'], "Item Status", 10);    
                 } else {$itemStatus = 'Item';}
@@ -67,7 +65,7 @@
                     //print an error message and redisplay the form
                         print("<p>Please re-enter the information below.</p><br>");
 
-                                if ($userType == "S" AND $verification == 'V'){
+                                if ($userType == "S"){
                                 //create a redisplay form to hold good information and throw out bad data
                                 $student = changeItemFormStudent($itemName, $category, $description, $picture, $price, $service, $item );
                                 } else {
@@ -98,7 +96,7 @@
                 $service = "unchecked";
                 $status = "";
                 
-                        if ($userType == "S" AND $verification == 'V'){
+                        if ($userType == "S"){
                         //create a redisplay form to hold good information and throw out bad data
                         $student = changeItemFormStudent($itemName, $category, $description, $picture, $price, $service, $item );
                         } else {

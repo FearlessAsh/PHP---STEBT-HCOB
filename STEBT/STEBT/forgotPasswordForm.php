@@ -5,7 +5,6 @@
 		<script language="JavaScript" type="text/JavaScript" src="login.js"></script>
 		<link rel ="stylesheet" type="text/css" href="css/formStyle.css" />
                 <link rel ="stylesheet" type="text/css" href="css/NewAccordion.css" />
-                <link href="HTML/styles/style3.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 	</head>
 	<body>
 	<?php
@@ -14,7 +13,6 @@
 		require_once("classes/StickyFormClass.php");
 		require_once("classes/LoginClass.php");
                 require_once("classes/redisplayFormClass.php");
-                require_once("includes/STEBTsmartHeader.php");
 		
 		//if the user has pressed the submit button
 		if (isset($_POST['submit'])) {    
@@ -40,8 +38,6 @@
 		//display the form for the first time
 		forgotPasswordForm($userName);
                 }
-                
-                require_once("includes/STEBTfooter.html");
 		?>
 	</body>
 </html>

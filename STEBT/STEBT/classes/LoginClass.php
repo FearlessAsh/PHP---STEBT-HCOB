@@ -61,8 +61,7 @@ function saveItem($UserName, $ItemName, $Category, $ItemType, $Description, $Pic
  */
 function saveStudentInformation($UserName, $SchoolEmail, $School, $CurrEnrollment, $FeeStatus, $ExpGradDate, $Major) {
     $db_connection = Connect();
-    $status = 'N';
-    $SQL = "INSERT INTO StudentUserAccount (UserName, SchoolEmail, School, CurrentlyEnrolled, FeeStatus, ExpGradDate, Major, Status) VALUES ('$UserName', '$SchoolEmail', '$School', '$CurrEnrollment', '$FeeStatus', '$ExpGradDate', '$Major', '$status')";
+    $SQL = "INSERT INTO StudentUserAccount VALUES ('$UserName', '$SchoolEmail', '$School', '$CurrEnrollment', '$FeeStatus', '$ExpGradDate', '$Major')";
     $createStudent = sqlsrv_Query($db_connection, $SQL);
     if($createStudent == FALSE) {Print("<p>Sorry, we were unable to create an student account for you</p>");
     } else {Print("<p>Success! You're all set! <a href='loginForm.php'>Login</a></p>"); }
@@ -184,7 +183,7 @@ function queryUser($userName){
  */
 function queryStudentUser($userName){
     $db_connection = Connect();
-    $SQL = "SELECT SchoolEmail, School, CurrentlyEnrolled, ExpGradDate, Major, Status FROM StudentUserAccount WHERE UserName = '$userName'";
+    $SQL = "SELECT SchoolEmail, School, CurrentlyEnrolled, ExpGradDate, Major FROM StudentUserAccount WHERE UserName = '$userName'";
     $createStudent = sqlsrv_Query($db_connection, $SQL);
     if($createStudent !== FALSE) { $Return = sqlsrv_fetch_array($createStudent, SQLSRV_FETCH_ASSOC);
     } else {Print("<p>Something went wrong</p>"); $Return = ""; } return $Return;
@@ -295,7 +294,7 @@ function updateFees($FeeID, $userName ){
 }
 
 function deleteItem($itemID){
-    $db_connection = Connect();
+     $db_connection = Connect();
     $SQL = "DELETE FROM SalesItems WHERE ItemID = '$itemID' ";
     $createItem = sqlsrv_Query($db_connection, $SQL);
     if($createItem == FALSE) {$return = "<p>Sorry, we were unable to delete an Item for you</p>";
@@ -303,19 +302,5 @@ function deleteItem($itemID){
     return($return);
 }
 
-function verificationEmail($userName){
-    $db_connection = Connect();
-    $SQL = "SELECT SchoolEmail, VerificationCode FROM StudentVerification_View WHERE UserName = '$userName' ";
-    $verificationResults = sqlsrv_Query($db_connection, $SQL);
-    if ($verificationResults !==FALSE){
-       $emailResult = sqlsrv_fetch_array($verificationResults, SQLSRV_FETCH_ASSOC); 
-       $userEmail = $emailResult['SchoolEmail'];
-       $verificationCode = $emailResult['VerificationCode'];
-       
-       $email =  mail($userEmail,"Your verification at STEBT", "Please Reply back to this email with the following code as your subject: $verificationCode . Thank you for choosing STEBT!");
-       if($email == TRUE) {print("Your verification email was sent.");}
-                       else{ print("Couldn't send your email");}
-    }else{print("database connection error");}  
-}
 
 ?>
