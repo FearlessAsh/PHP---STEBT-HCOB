@@ -1,0 +1,203 @@
+/*********************************************************************************/
+/* CSS for Accordion                                                             */
+/*********************************************************************************/
+ /* Set largest image size... Ashlea*/
+ img {max-height: 100px; max-width: 100px;}
+
+/*Accordion Container*/
+.ac-container{
+	width: auto;
+	margin: 10px auto 30px auto;
+	text-align: left;
+}
+
+/*EDIT THIS FOR TABLE CSS*/
+#hor-minimalist-b
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	background: #fff;
+	margin: 15px;
+	width: auto;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+#hor-minimalist-b th
+{
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
+	padding: 10px 8px;
+	border-bottom: 2px solid #000000;
+}
+
+#hor-minimalist-b td
+{
+	border-bottom: 1px solid #ccc;
+	color: #737373;
+	padding: 6px 8px;
+}
+
+#hor-minimalist-b tbody tr:hover td
+{
+	color: #000;
+	background: #F5F5F5;
+}
+
+/*accordion label (e.g. bronze, silver, gold)*/
+.ac-container label{
+	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+	font-weight: bold;
+	padding: 5px 20px;
+	position: relative;
+	z-index: 20;
+	display: block;
+	height: 35px;
+	cursor: pointer;
+	color: #000;
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 1%, #eaeaea 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#eaeaea));
+	background: -webkit-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+	background: -o-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+	background: -ms-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+	background: linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+	font-size: 19px;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 );
+	box-shadow: 
+		0px 0px 0px 1px rgba(155,155,155,0.3), 
+		1px 0px 0px 0px rgba(255,255,255,0.9) inset, 
+		0px 2px 2px rgba(0,0,0,0.1);
+}
+
+/*On hover settings for accordion label*/
+.ac-container label:hover{
+	background: #fff;
+}
+
+/*On hover effects for Bronze section*/
+.ac-container label:hover[for=Bronze]{
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 1%, #cd7f32 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#eaeaea));
+	background: -webkit-linear-gradient(top, #ffffff 1%,#cd7f32 100%);
+	background: -o-linear-gradient(top, #ffffff 1%,#cd7f32 100%);
+	background: -ms-linear-gradient(top, #ffffff 1%,#cd7f32 100%);
+	background: linear-gradient(top, #ffffff 1%,#cd7f32 100%);
+}
+
+/*On hover effects for Silver section*/
+.ac-container label:hover[for=Silver]{
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 1%, #C0C0C0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#eaeaea));
+	background: -webkit-linear-gradient(top, #ffffff 1%,#C0C0C0 100%);
+	background: -o-linear-gradient(top, #ffffff 1%,#C0C0C0 100%);
+	background: -ms-linear-gradient(top, #ffffff 1%,#C0C0C0 100%);
+	background: linear-gradient(top, #ffffff 1%,#C0C0C0 100%);
+}
+
+/*On hover effects for Gold section*/
+.ac-container label:hover[for=Gold]{
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 1%, #FFD700 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#eaeaea));
+	background: -webkit-linear-gradient(top, #ffffff 1%,#FFD700 100%);
+	background: -o-linear-gradient(top, #ffffff 1%,#FFD700 100%);
+	background: -ms-linear-gradient(top, #ffffff 1%,#FFD700 100%);
+	background: linear-gradient(top, #ffffff 1%,#FFD700 100%);
+}
+
+/*Open Container, label effects for Bronze*/
+.ac-container input:checked + label[for=Bronze]{
+	background: #cd7f32;
+	color: #000000;
+	text-shadow: 0px 1px 1px rgba(255,255,255, 0.6);
+	box-shadow: 
+		0px 0px 0px 1px rgba(155,155,155,0.3), 
+		0px 2px 2px rgba(0,0,0,0.1);
+}
+
+/*Open Container, label effects for Silver*/
+.ac-container input:checked + label[for=Silver]{
+	background: #C0C0C0;
+	color: #000000;
+	text-shadow: 0px 1px 1px rgba(255,255,255, 0.6);
+	box-shadow: 
+		0px 0px 0px 1px rgba(155,155,155,0.3), 
+		0px 2px 2px rgba(0,0,0,0.1);
+}
+
+/*Open Container, label effects for Gold*/
+.ac-container input:checked + label[for=Gold]{
+	background: #FFD700;
+	color: #000000;
+	text-shadow: 0px 1px 1px rgba(255,255,255, 0.6);
+	box-shadow: 
+		0px 0px 0px 1px rgba(155,155,155,0.3), 
+		0px 2px 2px rgba(0,0,0,0.1);
+}
+
+/*Closed Container formatting + arrow image*/
+.ac-container label:hover:after,
+.ac-container input:checked + label:hover:after{
+	content: '';
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	right: 13px;
+	top: 7px;
+	background: transparent url(../images/arrow_down.png) no-repeat center center;	
+}
+
+/*Open container - up arrow inside label */
+.ac-container input:checked + label:hover:after{
+	background-image: url(../images/arrow_up.png);
+}
+
+/*Hide checkboxes used by accordion slides*/
+.ac-container input{
+	display: none;
+}
+
+/*Transition formatting for articles inside .ac-container*/
+.ac-container article{
+	background: rgba(255, 255, 255, 0.5);
+	margin-top: -1px;
+	overflow: hidden;
+	height: 0px;
+	position: relative;
+	z-index: 10;
+	-webkit-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+	-moz-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+	-o-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+	-ms-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+	transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+}
+
+/*Transition formatting for checked input inside .ac-container*/
+.ac-container input:checked ~ article{
+	-webkit-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+	-moz-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+	-o-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+	-ms-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+	transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+	box-shadow: 0px 0px 0px 1px rgba(155,155,155,0.3);
+}
+
+/*The following three control the height of the accordion slides*/
+.ac-container input:checked ~ article.ac-bronze{
+	height: auto;
+}
+
+/**/
+.ac-container input:checked ~ article.ac-silver{
+	height: auto;
+}
+
+/**/
+.ac-container input:checked ~ article.ac-gold{
+	height: auto;
+}

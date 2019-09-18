@@ -1,0 +1,98 @@
+/* main default css */
+﻿body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+#container {
+	padding: 0;
+}
+#masthead {
+	width: auto;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+}
+#navigation {
+	width: auto;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	clear: both;
+}
+#column_l {
+	position: relative;
+	float: left;
+}
+#column_r {
+	float: left;
+}
+#footer {
+	width: auto;
+	clear: both;
+	overflow: auto;
+}
+.float_right {
+	float:right;
+}
+.auto-style1 {
+	text-decoration: underline;
+}
+.auto-style2 {
+	font-family: "Trebuchet MS";
+}
+.auto-style3 {
+	color: white;
+	text-align: center;
+}
+.auto-style4 {
+	text-align: center;
+	font-family: "Trebuchet MS";
+}
+.auto-style5 {
+	font-size: x-small;
+	text-align: right;
+}
+.auto-style6 {
+	font-size: x-small;
+	text-align: right;
+	margin-left: 50px;
+}
+
+/* layout.css contents */
+﻿body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+#container {
+	padding: 0;
+}
+#masthead {
+	width: auto;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+}
+#navigation {
+	width: auto;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	clear: both;
+}
+#column_l {
+	position: relative;
+	float: left;
+}
+#column_r {
+	float: left;
+}
+#footer {
+	width: auto;
+	clear: both;
+	overflow: auto;
+}
+.float_right {
+	float:right;
+}

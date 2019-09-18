@@ -1,0 +1,184 @@
+.auto-style1 {
+	text-decoration: underline;
+}
+.auto-style4 {
+	text-align: center;
+	font-family: "Trebuchet MS";
+}
+.auto-style5 {
+	font-size: x-small;
+	text-align: right;
+}
+.auto-style6 {
+	font-size: x-small;
+	text-align: right;
+	margin-left: 50px;
+}
+.auto-style7 {
+	margin-top: 0px;
+}
+.auto-style8 {
+	margin-left: 0px;
+}
+#left-nav {
+	width: 160px;
+	float: left;
+	background-color: #000000;
+	color: #FFFFFF;
+        padding-left: 20px;
+        
+
+}
+#left-nav a{
+    color: #fff;
+    padding-left: 30px;
+}
+#main-content {
+	margin-left: 200px;
+}
+.auto-style9 {
+	margin-bottom: 26px;
+}
+
+body {
+	color: black;
+	font-size: 13px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	background-color: #d3d9d6;
+	margin: 0;
+	padding: 0;
+	border: 0;
+
+}
+#container {
+	padding: 0;
+	background-color: #fff;
+	width: 620px;
+	margin: 0 auto;
+	border-top: 0;
+	border-right: 1px solid #b7b7b7;
+	border-bottom: 0;
+	border-left: 1px solid #b7b7b7;
+}
+#masthead {
+	text-align: right;
+	background-color: #036;
+	width: 620px;
+        width: auto;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+
+}
+#navigation {
+	background-color: #545454;
+	overflow: hidden;
+	width: auto;
+	margin-bottom: 10px;
+	padding: 2px;
+	border: 0;
+	clear: both;
+
+}
+#column_l {
+	width: 385px;
+	margin: 0;
+	padding: 0 15px;
+	background-color: #fff;
+		position: relative;
+	float: left;
+
+}
+#column_r {
+	width: 192px;
+	margin: 0;
+	float: right;
+	padding: 4px;
+	background-color: #a9a9a9;
+	position: relative;
+		float: left;
+}
+#footer {
+	width: 620px;
+        margin-top: 20px;
+	text-align: center;
+	background-color: #113962;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: auto;
+	clear: both;
+	overflow: auto;
+
+}
+/* Styles for Masthead */
+#masthead img { 
+	float: left; 
+}
+#masthead p {
+	font-size: 11px;
+	color: #fff;
+	margin: 10px 10px 0;
+}
+#column_r p {
+	font-size: 11px;
+	margin: 7px;
+}
+#masthead a{
+	color: #fff;
+}
+/* Styles for Navigation */
+#navigation ul {
+	list-style-type: none;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+#navigation li {
+	float: left;
+}
+#navigation a {
+	color: #fff;
+	text-decoration: none;
+	display: block;
+	padding: 5px;
+	border: 1px solid #c9c9c9;
+}
+#navigation a:hover {
+	color: #000;
+	text-decoration: none;
+	border: 1px solid #a9a9a9;
+	background-color: #a9a9a9;
+}
+/* Styles for Footer */
+#footer p {
+	font-size: 11px;
+	line-height: 14px;
+	color: #fff;
+	margin: 1px;
+	padding: 1px;
+}
+#footer a {
+	color: #fff;
+	text-decoration: underline;
+}
+#footer a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+/* Styles for Links */
+a {
+	color: #036;
+	text-decoration: underline;
+}
+a:hover {
+	color: #808080;
+	text-decoration: underline;
+}
+.style_bold {
+	font-weight: bold;
+}
+.style_italic {
+	font-style: italic;
+}
