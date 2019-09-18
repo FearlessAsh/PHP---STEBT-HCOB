@@ -1,0 +1,60 @@
+/*
+	Dopetrope 2.5 by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
+
+/*********************************************************************************/
+/* Basic                                                                         */
+/*********************************************************************************/
+	input[name="buynow"]
+	{
+		background:url(../pictures/button.png) no-repeat ; 
+		width:98px ; 
+		height:32px ;
+		border:none ;
+	}
+
+	input[name="edititems"]
+	{
+		background:url(../pictures/editItems.png) no-repeat ; 
+		width:98px ; 
+		height:32px ;
+		border:none ;
+	}
+	
+		input[name="payfees"]
+	{
+		background:url(../pictures/payFees.png) no-repeat ; 
+		width:98px ; 
+		height:32px ;
+		border:none ;
+	}
+	
+		h1
+        {
+                text-align: center;
+        }
+
+	body
+	{
+		background-color: #eeeeee;
+	}
+	
+	input
+	{
+		background-color: #bfbfbf;
+		color: #212121;
+		border-color: #212121;
+	}
+	
+	.button
+	{
+		background-color: #bfbfbf;
+		color:#000000;
+		border-color:#212121;
+	}
+	
+	
+	
+	
